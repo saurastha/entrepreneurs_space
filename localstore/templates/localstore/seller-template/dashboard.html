@@ -1,0 +1,194 @@
+{% extends 'dashboard-template.html' %} {% block content %}
+<!-- Content -->
+
+<div class="content">
+  <div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-bullet-list-67 text-warning"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Orders</p>
+                <p class="card-title">{{ order_count }}</p>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr />
+          <div class="stats">
+            <i class="fa fa-calendar-o"></i>
+            Till Date
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-money-coins text-success"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Revenue</p>
+                <p class="card-title" style="font-size: 80%">
+                  Rs. {{ total_revenue|floatformat:"0" }}
+                </p>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr />
+          <div class="stats">
+            <i class="fa fa-calendar-o"></i>
+            Till Date
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-cart-simple text-danger"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Products</p>
+                <p class="card-title">{{ seller.product_set.count }}</p>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr />
+          <div class="stats">
+            <i class="fa fa-clock-o"></i>
+            Added
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-favourite-28 text-primary"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Feedbacks</p>
+                <p class="card-title">{{ feedback_count }}</p>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr />
+          <div class="stats">
+            <i class="fa fa-clock-o"></i>
+            Reviews & Ratings
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h4 class="title">Recent Orders</h4>
+    <div class="table-responsive">
+      {% if recent_orders %}
+      <table class="table">
+        <thead class="text-primary">
+          <tr>
+            <th>Customer Name</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Sub-Total</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th class="text-center">Order Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in recent_orders %}
+          <tr>
+            <td>{{ item.order.customer }}</td>
+            <td>{{ item.product }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.sub_total }}</td>
+            <td>{{ item.order.customer.address.phone }}</td>
+            <td>{{ item.order.customer.address.address_1 }}</td>
+            <td class="text-center">
+              {{ item.order.placed_at|time:"H:i" }}
+              <!-- datetime -->
+              {{ item.order.placed_at|date:"D, d M Y" }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% else %}
+      <h6 class="text-danger">No Orders!</h6>
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <h4 class="title">Recent Added Products</h4>
+    <div class="table-responsive">
+      {% if recent_products %}
+      <table class="table">
+        <thead class="text-primary">
+          <tr>
+            <th>Product Name</th>
+            <th>Inventory</th>
+            <th>Unit Price</th>
+            <th>Collection</th>
+            <th class="text-center">Last Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in recent_products %}
+          <tr>
+            <td>{{ product.title }}</td>
+            <td>{{ product.inventory }}</td>
+            <td>{{ product.unit_price }}</td>
+            <td>{{ product.collection }}</td>
+            <td class="text-center">
+              {{ product.last_updated|time:"H:i" }}
+              <!--  -->
+              {{ product.last_updated|date:"D, d M Y" }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <h6 class="text-danger">No Recent Products</h6>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

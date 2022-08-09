@@ -1,0 +1,93 @@
+{% extends 'dashboard-template.html' %} {% block content %}
+<div class="content" style="min-height: 75vh">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-product">
+        <div
+          class="card-header"
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          "
+        >
+          <h5 class="card-title">Products Page</h5>
+
+          <a href="{% url 'add-product' %}" class="btn btn-primary btn-round"
+            ><i class="nc-icon nc-simple-add"></i> Add Products</a
+          >
+        </div>
+        <div class="card-body">
+          {% if products %} {% for product in products %}
+          <div class="row mb-3 p-3">
+            <div
+              class="col-md-12 col-sm-6 p-3"
+              style="border: 1px solid #ccc; border-radius: 9px"
+            >
+              <div class="row no-gutters" style="align-items: center">
+                <div class="col-md-3 mr-5 ml-2">
+                  <img
+                    src="{{product.productimage_set.all.0.image.url}}"
+                    class="img-fluid"
+                    alt=""
+                  />
+                </div>
+                <div class="col">
+                  <div class="card-block px-2">
+                    <h4 class="title">{{ product.title|title }}</h4>
+                    <p class="card-text text-justify">
+                      {{ product.description }}
+                    </p>
+                    <p class="card-text">Rs. {{ product.unit_price }}</p>
+                    <p class="card-text">{{ product.inventory }} left</p>
+                    <a
+                      href="{% url 'edit-product' product.id %}"
+                      class="btn btn-success btn-round btn-sm p-1"
+                      style="width: 6.4rem"
+                      >Edit</a
+                    >
+                    <a
+                      href="{% url 'delete-product' product.id %}"
+                      class="btn btn-danger btn-round btn-sm p-1"
+                      style="width: 6.4rem"
+                      >Delete</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="product-card col-md-3">
+              <div>
+                <img
+                  class="product-card-img"
+                  src="{{ product.productimage_set.all.0.image.url }}"
+                  alt="Card image cap"
+                />
+              </div>
+              <h4 class="card-title">{{ product.title|title }}</h4>
+              <h6 class="card-text">Rs. {{ product.unit_price }}</h6>
+              <h6 class="card-text">{{ product.inventory }} left</h6>
+              <div class="btn-wrapper">
+                <a
+                  href="{% url 'edit-product' product.id %}"
+                  class="btn btn-success btn-round btn-sm"
+                  >Edit</a
+                >
+                <a
+                  href="{% url 'delete-product' product.id %}"
+                  class="btn btn-danger btn-round btn-sm"
+                  >Delete</a
+                >
+              </div>
+            </div> -->
+          </div>
+          {% endfor %} {% else %}
+          <p class="card-subtitle color-danger">No products found!</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

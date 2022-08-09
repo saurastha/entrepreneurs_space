@@ -1,0 +1,86 @@
+{% extends 'dashboard-template.html' %} {% block content %}
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title">Add Product</h5>
+        </div>
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Product Name</label>
+                  {{ form.title }}
+                </div>
+              </div>
+              {% if edit %}
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Uploaded images</label>
+
+                  {% for image in product.productimage_set.all %}
+                  <!-- Get uploaded image -->
+                  <div style="display: flex; align-items: center; gap: 1rem">
+                    <a href="{{ image.image.url }}">{{ image.image.url }}</a>
+                    <a href="{% url 'delete-product-img' image.id %}"
+                      ><i class="nc-icon nc-simple-remove text-danger"></i
+                    ></a>
+                  </div>
+
+                  {% endfor %}
+                </div>
+              </div>
+              {% endif %}
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Description</label>
+                  {{ form.description }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Inventory</label>
+                  {{ form.inventory }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Unit Price</label>
+                  {{ form.unit_price }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Collection</label>
+                  {{ form.collection }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <label>Images</label>
+                {{ image_form }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="update ml-auto mr-auto" style="margin-top: 3.2rem">
+                <button type="submit" class="btn btn-primary btn-round">
+                  Save Product
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

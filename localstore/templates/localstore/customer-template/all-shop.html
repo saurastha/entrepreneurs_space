@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block content %}
+<section class="shop-blog section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title">
+          <h2>Browse Shop</h2>
+        </div>
+      </div>
+    </div>
+    {% if shops %}
+    <div class="row">
+      {% for shop in shops %}
+      <div class="col-lg-4 col-md-6 col-12">
+        <!-- Start Single Blog  -->
+        <div class="shop-single-blog">
+          <img
+            src="{{ shop.featured_image.url }}"
+            style="object-fit: cover; width: 23rem; height: 18rem"
+            alt="#"
+          />
+          <div class="content">
+            <a href="{% url 'shop' shop.id %}" class="title"
+              >{{ shop.shop_name }}</a
+            >
+          </div>
+        </div>
+        <!-- End Single Blog  -->
+      </div>
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <p>No shops to show!</p>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock content %}

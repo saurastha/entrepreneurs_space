@@ -1,0 +1,156 @@
+{% extends 'base.html' %} {% block content %}
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="bread-inner">
+          <ul class="bread-list">
+            <li>
+              <a href="{% url 'home' %}">Home<i class="ti-arrow-right"></i></a>
+            </li>
+            <li class="active"><a href="blog-single.html">Cart</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Breadcrumbs -->
+
+<!-- Shopping Cart -->
+<div class="shopping-cart section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {% if cart_items %}
+        <!-- Shopping Summery -->
+        <table class="table shopping-summery">
+          <thead>
+            <tr class="main-hading">
+              <th>PRODUCT</th>
+              <th>NAME</th>
+              <th class="text-center">UNIT PRICE</th>
+              <th class="text-center">QUANTITY</th>
+              <th class="text-center">TOTAL</th>
+              <th class="text-center">
+                <i class="ti-trash remove-icon"></i>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              {% for item in cart_items %}
+              <td class="image" data-title="No">
+                <img
+                  src="{{ item.product.productimage_set.all.0.image.url }}"
+                  alt="#"
+                  sytle="object-fit: contain;"
+                />
+              </td>
+              <td class="product-des" data-title="Description">
+                <p class="product-name"><a href="#">{{ item.product }}</a></p>
+              </td>
+              <td class="price" data-title="Price">
+                <span>Rs. {{ item.sub_total }} </span>
+              </td>
+              <td class="qty" data-title="Qty">
+                <!-- Input Order -->
+                <div class="input-group">
+                  <div class="button minus" style="padding: 0.8rem">
+                    <!-- <button
+                        type="submit"
+                        class="btn btn-primary btn-number"
+                        disabled="disabled"
+                        data-type="minus"
+                        data-field="quant[3]"
+                      >
+                        <i class="ti-minus"></i>
+                      </button> -->
+                    <a href="{% url 'remove-cart' item.product.id %}"
+                      ><i class="ti-minus"></i
+                    ></a>
+                  </div>
+                  <input
+                    type="text"
+                    name="quant[3]"
+                    class="input-number"
+                    data-min="1"
+                    data-max="100"
+                    value="{{ item.quantity }}"
+                  />
+                  <div class="button plus" style="padding: 0.8rem">
+                    <a href="{% url 'add-cart' item.product.id %}"
+                      ><i class="ti-plus"></i
+                    ></a>
+                    <!-- <button
+                        type="submit"
+                        class="btn btn-primary btn-number"
+                        data-type="plus"
+                        data-field="quant[3]"
+                      >
+                        <i class="ti-plus"></i>
+                      </button> -->
+                  </div>
+                </div>
+                <!--/ End Input Order -->
+              </td>
+              <td class="total-amount" data-title="Total">
+                <span>{{ item.sub_total }}</span>
+              </td>
+              <td class="action" data-title="Remove">
+                <a href="{% url 'remove-cart-item' item.product.id %}"
+                  ><i class="ti-trash remove-icon"></i
+                ></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          {% else %}
+          <p>Cart is empty!</p>
+
+          <a
+            href="{% url 'customer-main' %}"
+            class="btn mt-1"
+            style="color: #fff"
+            >View Products</a
+          >
+
+          {% endif %}
+        </table>
+        <!--/ End Shopping Summery -->
+      </div>
+    </div>
+    {% if cart_items %}
+    <div class="row">
+      <div class="col-12">
+        <!-- Total Amount -->
+        <div class="total-amount">
+          <div class="row justify-content-end">
+            <div class="col-lg-4 col-md-7 col-12">
+              <div class="right">
+                <ul>
+                  <li>Cart Subtotal<span>Rs. {{ total }}</span></li>
+                  <!-- <li>Shipping<span>Free</span></li>
+                  <li>You Save<span>$20.00</span></li> -->
+                  <li class="last">You Pay<span>Rs. {{ total }}</span></li>
+                </ul>
+                <div class="button5">
+                  <a href="{% url 'checkout' %}" class="btn">Checkout</a>
+                  <a href="{% url 'customer-main' %}" class="btn"
+                    >Continue shopping</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/ End Total Amount -->
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+<!--/ End Shopping Cart -->
+{% endblock content %}

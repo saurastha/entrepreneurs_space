@@ -1,0 +1,182 @@
+{% extends 'base.html' %} {% block content %} {% load customfilters%}
+
+<section class="shop-blog section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title">
+          <h2>Browse Shop</h2>
+        </div>
+      </div>
+    </div>
+    {% if shops %}
+    <div class="row">
+      {% for shop in shops %}
+      <div class="col-lg-4 col-md-6 col-12">
+        <!-- Start Single Blog  -->
+        <div class="shop-single-blog">
+          <img
+            src="{{ shop.featured_image.url }}"
+            style="object-fit: cover; width: 23rem; height: 18rem"
+            alt="#"
+          />
+          <div class="content">
+            <a href="{% url 'shop' shop.id %}" class="title"
+              >{{ shop.shop_name }}</a
+            >
+          </div>
+        </div>
+        <!-- End Single Blog  -->
+      </div>
+      {% endfor %}
+    </div>
+    <div class="row justify-content-center">
+      <a href="{% url 'shops' %}" class="btn" style="color: #fff">More</a>
+    </div>
+    {% else %}
+    <p>No shops to show!</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section free-version-banner">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8 offset-md-2 col-xs-12">
+        <div class="section-title mb-60">
+          <h5
+            class="text-white wow fadeInUp"
+            data-wow-delay=".4s"
+            style="
+              visibility: visible;
+              animation-delay: 0.4s;
+              animation-name: fadeInUp;
+            "
+          >
+            Apply for the vacancies available and don't miss the chance to work
+            with the growing entrepreneurs. You can work with the entrepreneurs
+            whose ideas you think are wonderful and find some jobs you love
+            doing.
+          </h5>
+
+          <div class="button">
+            <a
+              href="https://wpthemesgrid.com/downloads/eshop-ecommerce-html5-template/"
+              target="_blank"
+              rel="nofollow"
+              class="btn wow fadeInUp"
+              data-wow-delay=".8s"
+              >Apply Now</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="product-area section pt-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title">
+          <h2>Trending Item</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="product-info">
+          <div class="tab-content" id="myTabContent">
+            <!-- Start Single Tab -->
+            <div class="tab-pane fade show active" id="man" role="tabpanel">
+              <div class="tab-single">
+                {% if products %}
+                <div class="row">
+                  {% for product in products %}
+                  <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                    <div class="single-product">
+                      <div class="product-img">
+                        <a href="{% url 'view-product' product.id %}">
+                          <img
+                            class="default-img"
+                            src="{{ product.productimage_set.all.0.image.url }}"
+                            alt="#"
+                            style="
+                              width: 20rem;
+                              height: 20rem;
+                              object-fit: cover;
+                            "
+                          />
+                          {% if product.productimage_set.all.1.image.url %}
+                          <img
+                            class="hover-img"
+                            src="{{ product.productimage_set.all.1.image.url }}"
+                            alt="#"
+                            style="
+                              width: 20rem;
+                              height: 20rem;
+                              object-fit: cover;
+                            "
+                          />
+                          {% endif %}
+                        </a>
+                        <div class="button-head">
+                          <div class="product-action">
+                            <a
+                              data-toggle="modal"
+                              data-target="#exampleModal"
+                              title="Quick View"
+                              href="{% url 'view-product' product.id %}"
+                              ><i class="ti-eye"></i><span>View</span></a
+                            >
+                          </div>
+                          <div class="product-action-2">
+                            {% if request.user.is_authenticated %}
+                            <!-- Next Conditions -->
+                            {% if request.user|is_in_cart:product %}
+                            <a
+                              title="Add to cart"
+                              style="cursor: not-allowed; pointer-events: none"
+                              href=""
+                              >Added to cart</a
+                            >
+                            {% else %}
+                            <a
+                              title="Add to cart"
+                              href="{% url 'add-cart' product.id %}"
+                              >Add to cart</a
+                            >
+                            {% endif %} {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-content">
+                        <h3>
+                          <a href="{% url 'view-product' product.id %}"
+                            >{{ product.title|title }}</a
+                          >
+                        </h3>
+                        <div class="product-price">
+                          <span>Rs. {{ product.unit_price }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                {% else %}
+                <p>No products to show!</p>
+                {% endif %}
+              </div>
+            </div>
+            <!--/ End Single Tab -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

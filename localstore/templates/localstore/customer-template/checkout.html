@@ -1,0 +1,140 @@
+{% extends 'base.html' %} {% block content%}
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="bread-inner">
+          <ul class="bread-list">
+            <li>
+              <a href="{% url 'home' %}">Home<i class="ti-arrow-right"></i></a>
+            </li>
+            <li>
+              <a href="{% url 'cart' %}">Cart<i class="ti-arrow-right"></i></a>
+            </li>
+            <li class="active"><a href="blog-single.html">Checkout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Breadcrumbs -->
+
+<!-- Start Checkout -->
+<section class="shop checkout section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-12">
+        <div class="checkout-form">
+          <h2>Make Your Checkout Here</h2>
+          <!-- Form -->
+          <form class="form mt-1" method="post" action="#">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Name<span>*</span></label>
+                  <input
+                    type="text"
+                    name="name"
+                    value="{{ customer }}"
+                    placeholder=""
+                    disabled
+                    required="required"
+                  />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Email<span>*</span></label>
+                  <input
+                    type="text"
+                    name="name"
+                    value="{{ customer.user.email }}"
+                    disabled
+                    placeholder=""
+                    required="required"
+                  />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Phone Number<span>*</span></label>
+                  {{ form.phone }}
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>City<span>*</span></label>
+                  {{ form.city}}
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label>Province<span>*</span></label>
+                  {{ form.province }}
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label>Address Line 1<span>*</span></label>
+                  {{ form.address_1 }}
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label>Address Line 2<span></span></label>
+                  {{ form.address_2 }}
+                </div>
+              </div>
+            </div>
+            <div class="single-widget get-button">
+              <div class="content">
+                <div class="button">
+                  <button type="submit" class="btn">Save</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!--/ End Form -->
+        </div>
+      </div>
+      <div class="col-lg-4 col-12">
+        <div class="order-details">
+          <!-- Order Widget -->
+          <div class="single-widget">
+            <h2>CART TOTALS</h2>
+            <div class="content">
+              <ul>
+                {% for item in cart_items %}
+                <li>{{ item.product }}<span>Rs. {{ item.sub_total }}</span></li>
+                {% endfor %}
+                <!-- <li>(+) Shipping<span>$10.00</span></li> -->
+                <li class="last">
+                  Total<span>Rs. {{ cart.get_cart_total }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!--/ End Order Widget -->
+
+          <!-- Button Widget -->
+          <div class="single-widget get-button">
+            <div class="content">
+              <div class="button">
+                <a href="{% url 'create-order' %}" class="btn"
+                  >proceed to checkout</a
+                >
+              </div>
+            </div>
+          </div>
+          <!--/ End Button Widget -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/ End Checkout -->
+{% endblock content%}

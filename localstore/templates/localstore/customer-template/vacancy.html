@@ -1,0 +1,79 @@
+{% extends 'base.html' %} {% block content %}
+
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="bread-inner">
+          <ul class="bread-list">
+            <li>
+              <a href="{% url 'home' %}">Home<i class="ti-arrow-right"></i></a>
+            </li>
+            <li class="active"><a href="">Vacancy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Breadcrumbs -->
+
+<div class="shopping-cart section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {% if vacancies %}
+        <table class="table shopping-summery">
+          <tbody>
+            {% for vacancy in vacancies %}
+            <tr>
+              <td class="product-des col-4" data-title="Description">
+                <p class="product-name">
+                  <a href="" style="pointer-events: none">{{ vacancy.title }}</a
+                  ><span class="font-weight-bold">
+                    ({{ vacancy.seller.name }})</span
+                  >
+                </p>
+
+                {% if vacancy.description is not None %}
+                <p class="product-des text-justify">
+                  {{ vacancy.description }}
+                </p>
+                {% endif %}
+              </td>
+              <td class="price" data-title="Price">
+                <span>{{ vacancy.get_type_display }} </span>
+              </td>
+              <td class="price" data-title="Price">
+                <span>Openings: {{ vacancy.number_of_positions }} </span>
+              </td>
+              <td class="price" data-title="Price">
+                <span
+                  >Rs. {{ vacancy.min_salary }} - {{ vacancy.max_salary }}
+                </span>
+              </td>
+
+              <td class="total-amount" data-title="Total">
+                <p>{{ vacancy.seller.mobile }}</p>
+              </td>
+              <td class="total-amount" data-title="Total">
+                <span
+                  ><i class="fa-solid fa-location-dot"></i>
+                  <!--  -->
+                  {{ vacancy.location }}</span
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>No job openings currently available.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

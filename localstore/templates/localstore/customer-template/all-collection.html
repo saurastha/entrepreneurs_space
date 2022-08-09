@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block content %}
+<section class="shop-blog section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title">
+          <h2>Collections</h2>
+        </div>
+      </div>
+    </div>
+    {% if collections %}
+    <div class="row">
+      {% for item in collections %}
+      <div class="col-lg-4 col-md-6 col-12">
+        <!-- Start Single Blog  -->
+        <div class="shop-single-blog">
+          <img
+            src="{{ item.featured_image.url }}"
+            alt="#"
+            style="object-fit: cover; width: 23rem; height: 18rem"
+          />
+          <div class="content">
+            <a href="{% url 'collection-product' item.id %}" class="title"
+              >{{ item }}</a
+            >
+          </div>
+        </div>
+        <!-- End Single Blog  -->
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,460 @@
+{% extends 'base.html' %} {% block content %}
+
+<style>
+  .section_padding_130 {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  .faq_area {
+    position: relative;
+    z-index: 1;
+    background-color: #f5f5ff;
+  }
+
+  .faq-accordian {
+    position: relative;
+    z-index: 1;
+  }
+  .faq-accordian .card {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.5rem;
+  }
+  .faq-accordian .card:last-child {
+    margin-bottom: 0;
+  }
+  .faq-accordian .card .card-header {
+    background-color: #ffffff;
+    padding: 0;
+    border-bottom-color: #ebebeb;
+  }
+  .faq-accordian .card .card-header h6 {
+    cursor: pointer;
+    padding: 1.75rem 2rem;
+    color: #f7941d;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -ms-grid-row-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+  .faq-accordian .card .card-header h6 span {
+    font-size: 1.5rem;
+  }
+  .faq-accordian .card .card-header h6.collapsed {
+    color: #212529;
+  }
+  .faq-accordian .card .card-header h6.collapsed span {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+  }
+  .faq-accordian .card .card-body {
+    padding: 1.75rem 2rem;
+  }
+  .faq-accordian .card .card-body p:last-child {
+    margin-bottom: 0;
+  }
+</style>
+
+<div class="faq_area section_padding_130" id="faq">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-12 col-sm-8 col-lg-6">
+        <!-- Section Heading-->
+        <div
+          class="section_heading text-center wow fadeInUp"
+          data-wow-delay="0.2s"
+          style="
+            visibility: visible;
+            animation-delay: 0.2s;
+            animation-name: fadeInUp;
+          "
+        >
+          <h3><span>Frequently </span> Asked Questions</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <!-- FAQ Area-->
+      <div class="col-12 col-sm-10 col-lg-8">
+        <div class="accordion faq-accordian" id="faqAccordion">
+          <div
+            class="card border-0 wow fadeInUp"
+            data-wow-delay="0.2s"
+            style="
+              visibility: visible;
+              animation-delay: 0.2s;
+              animation-name: fadeInUp;
+            "
+          >
+            <div class="card-header" id="headingOne">
+              <h6
+                class="mb-0 collapsed"
+                data-toggle="collapse"
+                data-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                How can I order?<span class="lni-chevron-up"></span>
+              </h6>
+            </div>
+            <div
+              class="collapse"
+              id="collapseOne"
+              aria-labelledby="headingOne"
+              data-parent="#faqAccordion"
+            >
+              <div class="card-body">
+                <p>
+                  You can order easily using our online platform. When you find
+                  a product you need, you can add it to cart, login and go
+                  through the ordering process. After the order is ready, you
+                  will receive order summary to your email. Order summary will
+                  also be stored to your account.<br />
+
+                  You can also easily make reorders afterwards by clicking the
+                  “reorder” button on any of your previously made orders. After
+                  clicking the “reorder” button the cart will open, and you can
+                  change quantities or products.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="card border-0 wow fadeInUp"
+            data-wow-delay="0.3s"
+            style="
+              visibility: visible;
+              animation-delay: 0.3s;
+              animation-name: fadeInUp;
+            "
+          >
+            <div class="card-header" id="headingTwo">
+              <h6
+                class="mb-0 collapsed"
+                data-toggle="collapse"
+                data-target="#collapseTwo"
+                aria-expanded="true"
+                aria-controls="collapseTwo"
+              >
+                What information should I input when ordering?<span
+                  class="lni-chevron-up"
+                ></span>
+              </h6>
+            </div>
+            <div
+              class="collapse"
+              id="collapseTwo"
+              aria-labelledby="headingTwo"
+              data-parent="#faqAccordion"
+            >
+              <div class="card-body">
+                <p>
+                  Our online ordering system will ask for all the important
+                  information you should submit. If you have a phone number,
+                  please remember to submit it. This will make sure the shipment
+                  is not delayed.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="card border-0 wow fadeInUp"
+            data-wow-delay="0.4s"
+            style="
+              visibility: visible;
+              animation-delay: 0.4s;
+              animation-name: fadeInUp;
+            "
+          >
+            <div class="card-header" id="headingThree">
+              <h6
+                class="mb-0 collapsed"
+                data-toggle="collapse"
+                data-target="#collapseThree"
+                aria-expanded="true"
+                aria-controls="collapseThree"
+              >
+                How can I change delivery address?<span
+                  class="lni-chevron-up"
+                ></span>
+              </h6>
+            </div>
+            <div
+              class="collapse"
+              id="collapseThree"
+              aria-labelledby="headingThree"
+              data-parent="#faqAccordion"
+            >
+              <div class="card-body">
+                <p>
+                  You can easily change your delivery address during checkout.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="card border-0 wow fadeInUp"
+            data-wow-delay="0.2s"
+            style="
+              visibility: visible;
+              animation-delay: 0.2s;
+              animation-name: fadeInUp;
+            "
+          >
+            <div class="card-header" id="headingFour">
+              <h6
+                class="mb-0 collapsed"
+                data-toggle="collapse"
+                data-target="#collapseFour"
+                aria-expanded="true"
+                aria-controls="collapseFour"
+              >
+                What are the delivery charges?<span
+                  class="lni-chevron-up"
+                ></span>
+              </h6>
+            </div>
+            <div
+              class="collapse"
+              id="collapseFour"
+              aria-labelledby="headingFour"
+              data-parent="#faqAccordion"
+            >
+              <div class="card-body">
+                <p>
+                  Delivery charges are dependent on the shipment requirements
+                  and differ from shop to shop. If the products on your order
+                  are due to special requirements (for example dry ice) extra
+                  fee will be added to the shipment charges. You can see the
+                  shipping fees on the checkout process before the payment is
+                  made.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="card border-0 wow fadeInUp"
+            data-wow-delay="0.2s"
+            style="
+              visibility: visible;
+              animation-delay: 0.2s;
+              animation-name: fadeInUp;
+            "
+          >
+            <div class="card-header" id="headingFive">
+              <h6
+                class="mb-0 collapsed"
+                data-toggle="collapse"
+                data-target="#collapseFive"
+                aria-expanded="true"
+                aria-controls="collapseFive"
+              >
+                Do you have the product in stock?<span
+                  class="lni-chevron-up"
+                ></span>
+              </h6>
+            </div>
+            <div
+              class="collapse"
+              id="collapseFive"
+              aria-labelledby="headingFive"
+              data-parent="#faqAccordion"
+            >
+              <div class="card-body">
+                <p>
+                  All the products which are shown on our site are available.
+                  Order lead time depends on the products and quantities.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="card border-0 wow fadeInUp"
+            data-wow-delay="0.2s"
+            style="
+              visibility: visible;
+              animation-delay: 0.2s;
+              animation-name: fadeInUp;
+            "
+          >
+            <div class="card-header" id="headingSeven">
+              <h6
+                class="mb-0 collapsed"
+                data-toggle="collapse"
+                data-target="#collapseSix"
+                aria-expanded="true"
+                aria-controls="collapseSix"
+              >
+                Can I return a product?<span class="lni-chevron-up"></span>
+              </h6>
+            </div>
+            <div
+              class="collapse"
+              id="collapseSix"
+              aria-labelledby="headingSix"
+              data-parent="#faqAccordion"
+            >
+              <div class="card-body">
+                <p>
+                  If you want to return a product, please contact the shop you
+                  have ordered from.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="card border-0 wow fadeInUp"
+            data-wow-delay="0.2s"
+            style="
+              visibility: visible;
+              animation-delay: 0.2s;
+              animation-name: fadeInUp;
+            "
+          >
+            <div class="card-header" id="headingSeven">
+              <h6
+                class="mb-0 collapsed"
+                data-toggle="collapse"
+                data-target="#collapseSeven"
+                aria-expanded="true"
+                aria-controls="collapseSeven"
+              >
+                How to Sell on Espace Nepal?<span class="lni-chevron-up"></span>
+              </h6>
+            </div>
+            <div
+              class="collapse"
+              id="collapseSeven"
+              aria-labelledby="headingSeven"
+              data-parent="#faqAccordion"
+            >
+              <div class="card-body">
+                <p>
+                  Register as a seller, go to the sign-up page and click on
+                  'Become-seller'
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="card border-0 wow fadeInUp"
+            data-wow-delay="0.2s"
+            style="
+              visibility: visible;
+              animation-delay: 0.2s;
+              animation-name: fadeInUp;
+            "
+          >
+            <div class="card-header" id="headingEight">
+              <h6
+                class="mb-0 collapsed"
+                data-toggle="collapse"
+                data-target="#collapseEight"
+                aria-expanded="true"
+                aria-controls="collapseEight"
+              >
+                Do I need a company to sell on Espace Nepal?<span
+                  class="lni-chevron-up"
+                ></span>
+              </h6>
+            </div>
+            <div
+              class="collapse"
+              id="collapseEight"
+              aria-labelledby="headingEight"
+              data-parent="#faqAccordion"
+            >
+              <div class="card-body">
+                <p>
+                  No, you don't need to have a registered business to start
+                  selling on Espace. You can set up an Espace seller central
+                  account with your personal info or business info.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="card border-0 wow fadeInUp"
+            data-wow-delay="0.2s"
+            style="
+              visibility: visible;
+              animation-delay: 0.2s;
+              animation-name: fadeInUp;
+            "
+          >
+            <div class="card-header" id="headingNine">
+              <h6
+                class="mb-0 collapsed"
+                data-toggle="collapse"
+                data-target="#collapseNine"
+                aria-expanded="true"
+                aria-controls="collapseNine"
+              >
+                How can I retrieve my password?<span
+                  class="lni-chevron-up"
+                ></span>
+              </h6>
+            </div>
+            <div
+              class="collapse"
+              id="collapseNine"
+              aria-labelledby="headingNine"
+              data-parent="#faqAccordion"
+            >
+              <div class="card-body">
+                <p>
+                  You can retrieve your password by clicking “forgot password?”.
+                  Instruction on password retrieval will be send to your email.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="card border-0 wow fadeInUp"
+            data-wow-delay="0.2s"
+            style="
+              visibility: visible;
+              animation-delay: 0.2s;
+              animation-name: fadeInUp;
+            "
+          >
+            <div class="card-header" id="headingTen">
+              <h6
+                class="mb-0 collapsed"
+                data-toggle="collapse"
+                data-target="#collapseTen"
+                aria-expanded="true"
+                aria-controls="collapseTen"
+              >
+                Security<span class="lni-chevron-up"></span>
+              </h6>
+            </div>
+            <div
+              class="collapse"
+              id="collapseTen"
+              aria-labelledby="headingTen"
+              data-parent="#faqAccordion"
+            >
+              <div class="card-body">
+                <p>
+                  Our web store is secured with SSL certificate. This means the
+                  information you input is encrypted and it will not be
+                  available for third parties.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Support Button-->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

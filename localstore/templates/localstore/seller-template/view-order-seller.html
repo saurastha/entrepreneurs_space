@@ -1,0 +1,49 @@
+{% extends 'dashboard-template.html' %} {% block content %}
+<div class="content" style="min-height: 75vh">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-product">
+        <div class="card-header">
+          <h5 class="card-title">Orders</h5>
+        </div>
+        <div class="card-body">
+          {% if orderitems %}
+          <table class="table">
+            <thead class="text-primary">
+              <tr>
+                <th>Customer Name</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Sub-Total</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th class="text-center">Order Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in orderitems %}
+              <tr>
+                <td>{{ item.order.customer }}</td>
+                <td>{{ item.product }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.sub_total }}</td>
+                <td>{{ item.order.customer.address.phone }}</td>
+                <td>{{ item.order.customer.address.address_1 }}</td>
+                <td class="text-center">
+                  {{ item.order.placed_at|date:"D, d M Y" }}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          {% else %}
+          <h6 class="text-danger">No Orders!</h6>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

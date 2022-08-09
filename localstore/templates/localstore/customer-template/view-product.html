@@ -1,0 +1,209 @@
+{% extends 'base.html' %} {% load customfilters %}
+<!-- Content -->
+
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="card mb-5">
+      <div class="row no-gutters">
+        <aside class="col-md-6">
+          <div
+            id="carouselExampleControls"
+            class="carousel slide"
+            data-ride="carousel"
+          >
+            <div class="carousel-inner">
+              {% for image in product.productimage_set.all %}
+              <!-- Active Card -->
+              {% if forloop.counter == 1 %}
+              <div class="carousel-item active">
+                <img
+                  class="d-block w-100"
+                  src="{{ image.image.url }}"
+                  style="width: 30rem; height: 39rem; object-fit: cover"
+                  alt=""
+                />
+              </div>
+              {% else %}
+              <div class="carousel-item">
+                <img
+                  class="d-block w-100"
+                  src="{{ image.image.url }}"
+                  style="width: 30rem; height: 39rem; object-fit: contain"
+                  alt=""
+                />
+              </div>
+              {% endif %} {% endfor %}
+            </div>
+            <a
+              class="carousel-control-prev"
+              href="#carouselExampleControls"
+              role="button"
+              data-slide="prev"
+            >
+              <span
+                ><i
+                  class="fa fa-angle-left"
+                  aria-hidden="true"
+                  style="font-size: 2rem; color: #222"
+                ></i
+              ></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a
+              class="carousel-control-next"
+              href="#carouselExampleControls"
+              role="button"
+              data-slide="next"
+            >
+              <span
+                ><i
+                  class="fa fa-angle-right"
+                  aria-hidden="true"
+                  style="font-size: 2rem; color: #222"
+                ></i
+              ></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </aside>
+        <main class="col-md-6 border-left">
+          <div class="content-body p-5">
+            <h2 class="title">{{ product.title }}</h2>
+
+            <div class="mb-3">
+              <var class="price h4">Rs. {{ product.unit_price }}</var>
+            </div>
+            <div class="mb-3">
+              <h6 style="color: #f7941d">
+                {{ product.inventory }} item in
+                <!--  -->
+                stock{{product.inventory|pluralize:"s"}}
+              </h6>
+            </div>
+
+            <p>{{ product.description }}</p>
+            <hr />
+            {% if request.user.is_authenticated %}
+            <!-- Next Conditions -->
+            {% if request.user|is_in_cart:product %}
+
+            <a
+              href="{% url 'add-cart' product.id %}"
+              class="btn btn-primary"
+              style="cursor: not-allowed; pointer-events: none"
+            >
+              <span class="text text-light mr-1">Added to cart</span>
+              <i class="fa-solid fa-cart-shopping text-light"></i>
+            </a>
+            {% else %}
+            <a href="{% url 'add-cart' product.id %}" class="btn btn-primary">
+              <span class="text text-light mr-1">Add to cart</span>
+              <i class="fa-solid fa-cart-shopping text-light"></i>
+            </a>
+
+            {% endif %} {% endif %}
+            <div class="mt-5">
+              <p>Sold By: {{ product.seller }}</p>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <section class="blog-single section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-12">
+            <div class="blog-single-main">
+              <div class="row">
+                <div class="col-12">
+                  <div class="comments">
+                    <h3 class="comment-title">
+                      Reviews ({{ product.productfeedback_set.count }})
+                    </h3>
+                    {% if product.productfeedback_set.count > 0 %}
+                    <!-- Single Comment -->
+                    {% for feedback in product.productfeedback_set.all %}
+                    <div class="single-comment">
+                      <div class="content">
+                        <h4>
+                          {{ feedback.customer }} ({{ feedback.rating}}
+                          <!--  -->
+                          Star{{ feedback.rating|pluralize:"s" }})
+                          <span>
+                            <!--  -->
+                            {{ feedback.timestamp|date:"SHORT_DATE_FORMAT"}}
+                            <!--  -->
+                          </span>
+                        </h4>
+                        <p>{{ feedback.review }}</p>
+                      </div>
+                    </div>
+                    {% endfor %} {% else %}
+                    <div class="single-comment">
+                      <div class="content">
+                        <p>No reviews yet!</p>
+                      </div>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="reply">
+                    <div class="reply-head">
+                      <h2 class="reply-title">Leave a Review</h2>
+                      {% if not request.user.is_anonymous %}
+                      <!--  -->
+                      {% if request.user|has_ordered:product %}
+                      <!-- Comment Form -->
+                      {% if request.user|has_reviewed:product %}
+                      <p>Thank you for reviewing.</p>
+                      {% else %}
+                      <form class="form" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                          <div class="col-12">
+                            <div
+                              class="form-group"
+                              style="display: flex; flex-direction: column"
+                            >
+                              <label>Rating</label>
+
+                              {{ form.rating }}
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-group">
+                              <label>Review</label>
+                              {{ form.review }}
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-group button">
+                              <button type="submit" class="btn">
+                                Post review
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      <!-- End Comment Form -->
+                      {% endif %} {% else %}
+                      <p>You can only review after ordering.</p>
+                      {% endif %} {% else %}
+                      <p>You can only review after ordering.</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+{% endblock content %}

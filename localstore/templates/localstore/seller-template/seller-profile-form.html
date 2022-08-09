@@ -1,0 +1,121 @@
+{% extends 'dashboard-template.html' %} {% block content%}
+<div class="content">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="image mb-4">
+          {% if seller.featured_image.url %}
+          <img src="{{ seller.featured_image.url }}" alt="..." />
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <div class="author">
+            <h5 class="title mt-5">
+              {{ seller.first_name }} {{ seller.last_name }}
+            </h5>
+
+            <p class="description font-weight-bold">
+              @{{ seller.user.username }}
+            </p>
+          </div>
+          <p class="description text-center">{{ seller.shop_description }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title">Edit Profile</h5>
+        </div>
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Shop Name</label>
+                  {{ form.shop_name }}
+                </div>
+              </div>
+              <!-- <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label>Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{ seller.user.username }}"
+                  />
+                </div>
+              </div> -->
+              <!-- <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Email address</label>
+                  {{ form.email }}
+                </div>
+              </div> -->
+            </div>
+            <div class="row">
+              <!-- <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Name</label>
+                  {{ form.seller }}
+                </div>
+              </div> -->
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Address</label>
+                  {{ form.location }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label>Cover Image</label>
+                {{ form.featured_image }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Mobile</label>
+                  {{ form.mobile }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Contact</label>
+                  {{ form.contact }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Shop Description</label>
+                  {{ form.shop_description }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Entrepreneur's Description</label>
+                  {{ form.entrepreneur_description }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="update ml-auto mr-auto">
+                <button type="submit" class="btn btn-primary btn-round">
+                  Update Profile
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+<!-- Content -->
+
+{% block content %}
+
+<section class="section padding-y bg">
+  <div class="container">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-md-9 mt-0 mb-5">
+        <h2>My Orders</h2>
+      </div>
+      <main class="col-md-9">
+        {% if orders %} {% for order in orders %}
+        <article class="card">
+          <header class="card-header">
+            <strong class="d-inline-block mr-5"
+              >Order ID: #{{ order.id }}</strong
+            >
+            <span>Order Date: {{ order.placed_at }}</span>
+          </header>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-8">
+                <h6 class="text-muted">Delivery to</h6>
+                <p>
+                  {{ order.customer }} <br />
+                  Phone: {{ order.customer.address.phone }}<br />
+                  Email:
+                  <!--  -->
+                  {{ order.customer.email }} <br />
+                  Location: {{ order.customer.address.address_1 }},
+                  <!--  -->
+                  {{ order.customer.address.province }}, Nepal
+                </p>
+              </div>
+              <div class="col-md-4">
+                <h6 class="text-muted">Payment</h6>
+
+                <p>
+                  <span class="b">Total: Rs. {{ order.get_order_total }} </span>
+                </p>
+              </div>
+            </div>
+            <!-- row.// -->
+          </div>
+          <!-- card-body .// -->
+          <div class="table-responsive">
+            <table class="table table-hover">
+              {% for item in order.orderitem_set.all %}
+              <tr>
+                <td width="65">
+                  <img
+                    src="{{ item.product.productimage_set.all.0.image.url }}"
+                    class="img-xs border"
+                  />
+                </td>
+                <td>
+                  <p class="title mb-0">{{ item.product }}</p>
+                  <var class="price text-muted">Rs. {{ item.unit_price }}</var>
+                  <p>
+                    <a
+                      href="{% url 'view-product' item.product.id %}"
+                      style="color: #f7941d"
+                      >Review</a
+                    >
+                  </p>
+                </td>
+
+                <td>
+                  Seller <br />
+                  {{ item.product.seller }}
+                </td>
+                <td>
+                  <a href="{% url 'invoice' order.id %}" class="btn text-light"
+                    >View Invoice</a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </article>
+        {% endfor %} {% endif %}
+      </main>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

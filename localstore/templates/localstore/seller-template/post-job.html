@@ -1,0 +1,66 @@
+{% extends 'dashboard-template.html' %} {% block content%}
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title">Post Job</h5>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Job Title:</label>
+                  {{ form.title }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Number of positions:</label>
+                  {{ form.number_of_positions }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Type</label>
+                  {{ form.type }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Min Salary</label>
+                  {{ form.min_salary }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Max Salary</label>
+                  {{ form.max_salary }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label>Location</label>
+                {{ form.location }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="update mt-3 ml-auto mr-auto">
+                <button type="submit" class="btn btn-primary btn-round">
+                  Post Job
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

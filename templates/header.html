@@ -1,0 +1,171 @@
+{% load static %}
+<!-- Header -->
+<header class="header shop">
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 col-md-12 col-12">
+          <!-- Top Right -->
+          <div class="top-left">
+            <ul class="list-main">
+              {% if request.user.is_authenticated %}
+              <li>
+                <i class="ti-power-off"></i
+                ><a href="{% url 'logout' %}">Logout</a>
+              </li>
+              {% else %}
+
+              <!-- <li><i class="ti-user"></i> <a href="#">My account</a></li> -->
+              <li>
+                <i class="ti-power-off"></i
+                ><a href="{% url 'login' %}">Login</a>
+              </li>
+              <li>
+                <a href="{% url 'register-customer' %}">Sign Up</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+          <!-- End Top Right -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Topbar -->
+  <div class="middle-inner">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2 col-md-2 col-12">
+          <!-- Logo -->
+          <div class="logo">
+            <a href="{% url 'home' %}"
+              ><img src="{% static 'images/logo1.png' %}" alt="logo"
+            /></a>
+          </div>
+          <!--/ End Logo -->
+          <!-- Search Form -->
+          <div class="search-top">
+            <div class="top-search">
+              <a href=""><i class="ti-search"></i></a>
+            </div>
+            <!-- Search Form -->
+            <div class="search-top">
+              <form class="search-form">
+                <input type="text" placeholder="Search here..." name="search" />
+                <button value="search" type="submit">
+                  <i class="ti-search"></i>
+                </button>
+              </form>
+            </div>
+            <!--/ End Search Form -->
+          </div>
+          <!--/ End Search Form -->
+          <div class="mobile-nav"></div>
+        </div>
+        <div class="col-lg-8 col-md-7 col-12">
+          <div class="search-bar-top">
+            <div class="search-bar">
+              <select onchange="location = this.value;"">
+                <option selected="selected" value="{% url 'collections' %}">All Category</option>
+                {% for collection in collections %}
+                <option value="{% url 'collection-product' collection.id %}">
+                  {{ collection }}
+                </option>
+
+                {% endfor %}
+              </select>
+              <form action="{% url 'search-result' %}" method="get">
+                <input
+                  name="search_query"
+                  value="{{search_query}}"
+                  placeholder="Search Products Here....."
+                  type="search"
+                />
+                <button type="submit" class="btnn"><i class="ti-search"></i></button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-3 col-12">
+          <div class="right-bar">
+            <!-- Search Form -->
+
+            <div class="sinlge-bar shopping">
+								<a href="#" class="single-icon"><i class="fa fa-user-circle-o"></i></a>
+								<!-- Shopping Item -->
+								<div class="shopping-item">
+									
+									<ul class="shopping-list">
+										<li>
+											<h4><a href="#">My Account</a></h4>
+										</li>
+										<li>
+											<h4><a href="{% url 'view-order' %}">Orders</a></h4>
+										</li>
+									</ul>
+								</div>
+								<!--/ End Shopping Item -->
+						</div>
+            <div class="sinlge-bar shopping">
+              <a href="{% url 'cart' %}" class="single-icon"
+                ><i class="ti-bag"></i>
+                {% if request.user.is_anonymous%}
+                <span class="total-count">0</span>
+                {% else %}
+                 <span class="total-count">{{ request.user.customer.cart.cartitem_set.count }}</span>
+                 {% endif %}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Header Inner -->
+  <div class="header-inner">
+    <div class="container">
+      <div class="cat-nav-head">
+        <div class="row">
+          <div class="col-lg-9 col-12">
+            <div class="menu-area">
+              <!-- Main Menu -->
+              <nav class="navbar navbar-expand-lg">
+                <div class="navbar-collapse">
+                  <div class="nav-inner">
+                    <ul class="nav main-menu menu navbar-nav">
+                      <li class="active">
+                        <a href="{% url 'home' %}">Home</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'all-product' %}">All Products</a>
+                      </li>
+
+                      <li>
+                        <a href="#">Services<i class="ti-angle-down"></i></a>
+                        <ul class="dropdown">
+                          <li><a href="{% url 'vacancy' %}">Vacancy</a></li>
+                          <li><a href="">Bulk Order</a></li>
+                        </ul>
+                      </li>
+                      <li>
+                        <a href="#">About Us<i class="ti-angle-down"></i></a>
+                        <ul class="dropdown">
+                          <li><a href="{% url 'faq' %}">FAQs</a></li>
+                         
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+              <!--/ End Main Menu -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ End Header Inner -->
+</header>
+<!--/ End Header -->

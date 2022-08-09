@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+<!-- Content -->
+
+{% block content %}
+
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="bread-inner">
+          <ul class="bread-list">
+            <li>
+              <a href="{% url 'home' %}">Home<i class="ti-arrow-right"></i></a>
+            </li>
+            <li class="active"><a href="blog-single.html">Invoice</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container">
+    <div class="col-12 mt-0 mb-5">
+      {% if page == 'invoice' %}
+      <h2>Invoice</h2>
+      {% else %}
+      <h2>Order Placed Successfully!</h2>
+      {% endif %}
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body p-0">
+            <div class="row pb-5 p-5">
+              <div class="col-md-6">
+                <p class="font-weight-bold mb-4">Client Information</p>
+                <p class="mb-1">{{ customer }}</p>
+                <p>{{ customer.address.address_1 }}</p>
+                <p class="mb-1">
+                  {{ customer.address.city }}, {{ customer.address.province }}
+                </p>
+                <p class="mb-1">{{ customer.address.phone }}</p>
+              </div>
+
+              <div class="col-md-6 text-right">
+                <p class="font-weight-bold mb-1">Invoice: #{{ order.id }}</p>
+                <p class="text-muted">
+                  Due to: {{ order.placed_at|date:"D, d M Y" }}
+                </p>
+              </div>
+            </div>
+
+            <div class="row p-5">
+              <div class="col-md-12">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th
+                        class="border-0 text-uppercase small font-weight-bold"
+                      >
+                        S.N
+                      </th>
+                      <th
+                        class="border-0 text-uppercase small font-weight-bold"
+                      >
+                        Item
+                      </th>
+
+                      <th
+                        class="border-0 text-uppercase small font-weight-bold"
+                      >
+                        Quantity
+                      </th>
+                      <th
+                        class="border-0 text-uppercase small font-weight-bold"
+                      >
+                        Unit Cost
+                      </th>
+                      <th
+                        class="border-0 text-uppercase small font-weight-bold"
+                      >
+                        Total
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for orderitem in orderitems %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ orderitem.product }}</td>
+
+                      <td>{{ orderitem.quantity }}</td>
+                      <td>Rs. {{ orderitem.unit_price }}</td>
+                      <td>Rs. {{ orderitem.sub_total }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row-reverse bg-dark text-white p-4">
+              <div class="py-3 px-5 text-right">
+                <div class="mb-2">Grand Total</div>
+                <div class="h2 font-weight-light">
+                  Rs. {{ order.get_order_total }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

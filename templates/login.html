@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Login</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'main_static/css/login.css' %}" />
+  </head>
+  <body>
+    <div class="screen-1">
+      <div>
+        <a href="{% url 'home' %}">Home</a>
+        {% if messages %} {% for message in messages %}
+        <p class="text-danger">{{ message }}</p>
+        {% endfor %} {% endif %}
+      </div>
+      <h1 style="margin-bottom: 3rem">Login</h1>
+      <form class="form" method="post">
+        {% csrf_token %}
+        <div class="email">
+          <label for="email">Username</label>
+          <div class="sec-2">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" name="username" placeholder="Your username.." />
+          </div>
+        </div>
+        <div class="password">
+          <label for="password">Password</label>
+          <div class="sec-2">
+            <i class="fa-solid fa-lock"></i>
+            <input
+              class="pas"
+              type="password"
+              name="password"
+              placeholder="············"
+            />
+          </div>
+        </div>
+
+        <button class="login">Login</button>
+      </form>
+      <div class="footer">
+        <a href="{% url 'register-customer' %}">Sign up</a
+        ><a href="{% url 'reset_password' %}">Forgot Password?</a>
+      </div>
+    </div>
+  </body>
+</html>
